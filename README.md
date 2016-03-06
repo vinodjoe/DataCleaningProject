@@ -6,18 +6,20 @@
   the training data and 30% the test data.
 
 #Obtaining the data :-
-```features<- read.table("./UCI HAR Dataset/features.txt")
+```
+  features<- read.table("./UCI HAR Dataset/features.txt")
    act_lab<- read.table("./UCI HAR Dataset/activity_labels.txt")
         t_act_typ<- read.table("./UCI HAR Dataset/test/y_test.txt")
         t_act_per<- read.table("./UCI HAR Dataset/test/subject_test.txt")
-        t_set<- read.table("./UCI HAR Dataset/test/X_test.txt")```
+        t_set<- read.table("./UCI HAR Dataset/test/X_test.txt")
+        ```
         #Addding on subject number, converting the activity number to activity
         #labels for all the colomns in the data set 
      ```t_act_typ<-factor(t_act_typ$V1,labels = act_lab$V2)``` #converted activity to a factors
-     ```t_set_inc<-cbind(t_act_per,t_act_typ)
-        colnames(t_set_inc)<- c("Subject","Activity)```#adding subject and Activity
-     ```colnames(t_set)<-features$V2```# setting appropritate colomn names 
-     ```t_set_comp<-cbind(t_set_inc,t_set)``` # cleaned test data set 
+     ```t_set_inc<-cbind(t_act_per,t_act_typ) ```
+    ``` colnames(t_set_inc)<- c("Subject","Activity) ``` #adding subject and Activity 
+    ``` colnames(t_set)<-features$V2 ```    # setting appropritate colomn names 
+     ``` t_set_comp<-cbind(t_set_inc,t_set) ``` # cleaned test data set 
         
         #Repeat process for train data set 
         
@@ -30,6 +32,6 @@
      ```ds _meanstd<-cbind(comp_ds[,1:2],comp_ds_meanstd)```
         
         # set with the average of each variable for each activity and each subject.
-     ```result<- ds_meanstd%>% group_by(Subject,Activity)%>% summarise_each(funs(mean))
-         result_tidy<-arrange(result,desc(Subject))
-         write.table(result_tidy,"r_analyis_result.txt", row.names = FALSE)```#writing the result 
+    ```result<- ds_meanstd%>% group_by(Subject,Activity)%>% summarise_each(funs(mean))```
+   ``` result_tidy<-arrange(result,desc(Subject)) ```
+   ``` write.table(result_tidy,"r_analyis_result.txt", row.names = FALSE)```#writing the result 
